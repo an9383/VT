@@ -1,0 +1,130 @@
+﻿using DevExpress.Spreadsheet;
+using DevExpress.Spreadsheet.Export;
+using DevExpress.XtraEditors;
+using DevExpress.XtraSpreadsheet;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+using VTMES3_RE.Common;
+
+namespace VTMES3_RE.View.WorkManager
+{
+    public partial class frmUsbLockKey : DevExpress.XtraEditors.XtraForm
+    {
+        string folderName = Application.StartupPath + @"\Templates\USBLockkey";
+        string fileName = "USB_LockKey.xlsx";
+        public frmUsbLockKey()
+        {
+            InitializeComponent();
+
+            barEditStartDate.EditValue = DateTime.Today;
+            barEditEndDate.EditValue = DateTime.Today;
+
+            sW_LOCK_MASTERBindingSource.AllowNew = false;
+        }
+
+        private void frmUsbLockKey_Load(object sender, EventArgs e)
+        {
+            DisplayData();
+
+            IWorkbook workbook = excelSheetControl.Document;
+            workbook.LoadDocument(folderName + "\\" + fileName);
+            Worksheet worksheet = workbook.Worksheets[0];
+
+            worksheet.DataBindings.BindTableToDataSource(sW_LOCK_MASTERBindingSource, 0, 0);
+        }
+
+        private void DisplayData()
+        {
+            this.sW_LOCK_MASTERTableAdapter.FillByDate(this.iFSYSDataSet.SW_LOCK_MASTER, (DateTime)barEditStartDate.EditValue, ((DateTime)barEditEndDate.EditValue).AddDays(1));
+        }
+
+        private void cmdSave_ElementClick(object sender, DevExpress.XtraBars.Navigation.NavElementEventArgs e)
+        {
+            try
+            {
+                if (excelSheetControl.IsCellEditorActive)
+                {
+                    excelSheetControl.CloseCellEditor(CellEditorEnterValueMode.ActiveCell);
+                }
+
+                this.Validate();
+
+                foreach (DataRowView drv in sW_LOCK_MASTERBindingSource.List)
+                {
+                    if (drv.Row.RowState == DataRowState.Added)
+                    {
+                        drv["CREATE_USER"] = WrGlobal.LoginID;
+                        drv["CREATE_DATE"] = DateTime.Now;
+                    }
+                    else if (drv.Row.RowState == DataRowState.Modified)
+                    {
+                        drv["UPDATE_USER"] = WrGlobal.LoginID;
+                        drv["UPDATE_DATE"] = DateTime.Now;
+                    }
+                }
+
+                sW_LOCK_MASTERBindingSource.EndEdit();
+                sW_LOCK_MASTERTableAdapter.Update(this.iFSYSDataSet.SW_LOCK_MASTER);
+
+                CellRange range = excelSheetControl.Document.Worksheets[0].GetDataRange();
+                DataTable excelTable = excelSheetControl.Document.Worksheets[0].CreateDataTable(range, true);
+                excelTable.TableName = "SaveTable";
+
+                DataTableExporter exporter = excelSheetControl.Document.Worksheets[0].CreateDataTableExporter(range, excelTable, true);
+                exporter.Options.ConvertEmptyCells = true;
+                exporter.Options.DefaultCellValueToColumnTypeConverter.EmptyCellValue = 0;
+                exporter.Options.DefaultCellValueToColumnTypeConverter.SkipErrorValues = true;
+
+                exporter.CellValueConversionError += exporter_CellValueConversionError;
+                exporter.Export();
+
+                excelSheetControl.EndUpdate();
+
+                DataRow[] newRows = excelTable.Select("ID_KEY IS NULL OR ID_KEY = 0");
+
+                foreach (DataRow row in newRows)
+                {
+                    sW_LOCK_MASTERTableAdapter.Insert((row["LOCK_KEY_SN"] ?? "").ToString(), (row["SW_KEY_CONTENT"] ?? "").ToString(),
+                                                                        DateTime.Now, WrGlobal.LoginID, null, null);
+                }
+
+                MessageBox.Show("저장되었습니다.", "저장", MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+                DisplayData();
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "에러", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        private void cmdClose_ElementClick(object sender, DevExpress.XtraBars.Navigation.NavElementEventArgs e)
+        {
+            this.Close();
+        }
+        private void exporter_CellValueConversionError(object sender, CellValueConversionErrorEventArgs e)
+        {
+            DataTableExporter exporter = sender as DataTableExporter;
+            CellValueToColumnTypeConverter defaultToColumnTypeConverter = exporter != null ? exporter.Options.DefaultCellValueToColumnTypeConverter : null;
+            if (e.DataColumn.DataType == typeof(Double) && e.CellValue.IsText)
+            {
+                object newDataTableValue = CellValue.Empty;
+                ConversionResult isConverted = defaultToColumnTypeConverter.Convert(e.Cell, e.CellValue, e.DataColumn.DataType, out newDataTableValue);
+                e.DataTableValue = newDataTableValue;
+                e.Action = isConverted == ConversionResult.Success ? DataTableExporterAction.Continue : DataTableExporterAction.SkipRow;
+            }
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
+        {
+            DisplayData();
+        }
+    }
+}

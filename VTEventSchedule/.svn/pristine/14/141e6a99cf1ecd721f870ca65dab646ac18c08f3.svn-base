@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.4.33122.133
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VTEventSchedule", "VTEventSchedule\VTEventSchedule.csproj", "{BA048874-1121-40BA-86F9-F3BF69811B10}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{BA048874-1121-40BA-86F9-F3BF69811B10}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA048874-1121-40BA-86F9-F3BF69811B10}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA048874-1121-40BA-86F9-F3BF69811B10}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA048874-1121-40BA-86F9-F3BF69811B10}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		VisualSVNWorkingCopyRoot = .
+		SolutionGuid = {5F5BEAAF-EE5F-4BE0-AE42-168FE4009089}
+	EndGlobalSection
+EndGlobal

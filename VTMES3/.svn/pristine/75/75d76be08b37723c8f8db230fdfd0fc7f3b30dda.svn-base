@@ -1,0 +1,20 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using VTMES3_RE.Common;
+
+
+namespace VTMES3_RE.Models
+{
+    public class clsWork
+    {
+        Database db = new Database();
+        string query = "";
+
+        public DataView Get_Sys_ForwardTracking(string serialNo)
+        {
+            query = string.Format("exec CAMDBsh.VR_Proc_Sys_ForwardTracking '{0}'", serialNo);
+            return db.GetDataView("Sys_ForwardTracking", query);
+        }
+    }
+}

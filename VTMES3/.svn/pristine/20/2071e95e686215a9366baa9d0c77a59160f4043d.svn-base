@@ -1,0 +1,36 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using VTMES3_RE.Common;
+
+namespace VTMES3_RE.Models
+{
+    public class clsCamstarWork
+    {
+        CamstarDatabase db = new CamstarDatabase();
+        string query = "";
+
+        public DataView GetWorkflowStepByFilter(string factoryName)
+        {
+            query = string.Format("Select ItemCode, ItemName From IFSYS.dbo.VM_ItemDef Where FactoryName = N'{0}' and ItemGubun = 'ESigWorkflowStepName' Order by SortOrder", factoryName);
+            return db.GetDataView("공정", query);
+        }
+
+        public DataView GetDataViewByQuery(string tblName, string _query)
+        {
+            return db.GetDataView(tblName, _query);
+        }
+
+        public void ExecuteQry(string _query)
+        {
+            db.ExecuteQuery(_query);
+        }
+        public int ExecuteQryList(List<string> queryList)
+        {
+            return db.ExecuteQueryList(queryList);
+        }
+    }
+}

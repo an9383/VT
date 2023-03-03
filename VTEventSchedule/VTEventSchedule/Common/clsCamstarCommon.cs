@@ -1,0 +1,287 @@
+﻿using Camstar.XMLClient.API;
+using DevExpress.XtraEditors.TextEditController.Win32;
+using System;
+using System.Collections.Generic;
+using System.IO;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace VTEventSchedule.Common
+{
+    public class clsCamstarCommon
+    {
+        csiClient gClient = new csiClient();
+        csiConnection gConnection = null;
+        csiSession gSession = null;
+        csiDocument gDocument = null;
+        csiService gService = null;
+        string gStrSessionID = "";
+
+        string gHost = WrGlobal.Camstar_Host;
+        int gPort = WrGlobal.Camstar_Port;
+
+        string gUserName = WrGlobal.Camstar_UserName;
+        string gPassword = WrGlobal.Camstar_Password;
+
+        public clsCamstarCommon()
+        {
+            try
+            {
+                gConnection = gClient.createConnection(gHost, gPort);
+                //gSession = gConnection.createSession(gUserName, gPassword, gSessionID.ToString());
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message, "Camstar", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
+        }
+
+        public bool CreateDocumentandService(string documentName, string serviceName)
+        {
+            try
+            {
+                if (documentName.Length > 0)
+                {
+                    gSession.removeDocument(documentName);
+                }
+
+                if (gService != null)
+                {
+                    gService = null;
+                }
+
+                gDocument = gSession.createDocument(documentName);
+
+                if (serviceName.Length > 0)
+                {
+                    gService = gDocument.createService(serviceName);
+                }
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                return false;
+            }
+
+        }
+
+        public string RoleDelete(string employeeName, int idx)
+        {
+            csiDocument ResponseDocument = null;
+            csiObject InputData = null;
+            csiObject InputData2 = null;
+            csiSubentity ObjectChanges = null;
+            csiNamedSubentityList Roles = null;
+
+            try
+            {
+                CreateDocumentandService("EmployeeMaintTrans", "EmployeeMaint");
+
+                InputData = gService.inputData();
+                InputData.namedObjectField("ObjectToChange").setRef(employeeName);
+
+                gService.perform("Load");
+
+                InputData2 = gService.inputData();
+
+                ObjectChanges = InputData2.subentityField("ObjectChanges");
+                Roles = ObjectChanges.namedSubentityList("Roles");
+
+                Roles.deleteItemByIndex(idx);
+
+                gService.setExecute();
+                gService.requestData().requestField("CompletionMsg");
+
+                PrintDoc(gDocument.asXML(), true);
+                ResponseDocument = gDocument.submit();
+                PrintDoc(ResponseDocument.asXML(), false);
+                return ErrorsCheck(ResponseDocument);
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+
+        public string RoleAdd(string employeename, string roleName)
+        {
+            csiDocument ResponseDocument = null;
+            csiObject InputData = null;
+            csiObject InputData2 = null;
+            csiSubentity ObjectChanges = null;
+            csiSubentity Members = null;
+
+            try
+            {
+                CreateDocumentandService("EmployeeMaintTrans", "EmployeeMaint");
+
+                InputData = gService.inputData();
+                InputData.namedObjectField("ObjectToChange").setRef(employeename);
+
+                gService.perform("Load");
+
+                InputData2 = gService.inputData();
+
+                ObjectChanges = InputData2.subentityField("ObjectChanges");
+                Members = ObjectChanges.subentityList("Roles").appendItem();
+                Members.namedObjectField("Role").setRef(roleName);
+                Members.dataField("PropagateToChildOrgs").setValue(false.ToString());
+
+                gService.setExecute();
+                gService.requestData().requestField("CompletionMsg");
+
+                PrintDoc(gDocument.asXML(), true);
+                ResponseDocument = gDocument.submit();
+                PrintDoc(ResponseDocument.asXML(), false);
+                return ErrorsCheck(ResponseDocument);
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+
+        public void PrintDoc(string strDoc, bool isInputDoc)
+        {
+            string strDocFileName = "";
+            string path = Path.GetDirectoryName(System.Reflection.Assembly.GetExecutingAssembly().Location);
+
+            if (isInputDoc)
+            {
+                strDocFileName = "inputDoc.xml";
+            }
+            else
+            {
+                strDocFileName = "responseDoc.xml";
+            }
+
+            if (File.Exists(path + "\\" + strDocFileName))
+            {
+                File.Delete(path + "\\" + strDocFileName);
+            }
+
+            File.WriteAllText(path + "\\" + strDocFileName, strDoc, Encoding.Default);
+        }
+
+        private string ErrorsCheck(csiDocument ResponseDocument)
+        {
+            csiExceptionData csiexceptiondata;
+            string errMsg = "";
+
+            if (ResponseDocument.checkErrors())
+            {
+                csiexceptiondata = ResponseDocument.exceptionData();
+
+                errMsg = "Severity: " + csiexceptiondata.getSeverity() + " Description: " + csiexceptiondata.getDescription();
+            }
+
+            return errMsg;
+        }
+
+        public string ContainerHoldLoop(string containerName, string holdReasonName)
+        {
+            csiDocument ResponseDocument = null;
+            csiObject InputData = null;
+            string err = "";
+
+            try
+            {
+                if (!CreateDocumentandService("HoldDoc", "Hold"))
+                {
+                    err = CreateSession();
+                    if (err != "") return err;
+                }
+
+                InputData = gService.inputData();
+
+                InputData.namedObjectField("Container").setRef(containerName);
+                InputData.namedObjectField("HoldReason").setRef(holdReasonName);
+
+                gService.setExecute();
+                gService.requestData().requestField("CompletionMsg");
+
+                PrintDoc(gDocument.asXML(), true);
+                ResponseDocument = gDocument.submit();
+                PrintDoc(ResponseDocument.asXML(), false);
+
+                return ErrorsCheck(ResponseDocument);
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+
+        public string ContainerReleaseLoop(string containerName, string releaseReasonName)
+        {
+            csiDocument ResponseDocument = null;
+            csiObject InputData = null;
+            string err = "";
+
+            try
+            {
+                if (!CreateDocumentandService("ReleaseDoc", "Release"))
+                {
+                    err = CreateSession();
+                    if (err != "") return err;
+                }
+
+                InputData = gService.inputData();
+
+                InputData.namedObjectField("Container").setRef(containerName);
+                InputData.namedObjectField("ReleaseReason").setRef(releaseReasonName);
+
+                gService.setExecute();
+                gService.requestData().requestField("CompletionMsg");
+
+                PrintDoc(gDocument.asXML(), true);
+                ResponseDocument = gDocument.submit();
+                PrintDoc(ResponseDocument.asXML(), false);
+
+                return ErrorsCheck(ResponseDocument);
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+
+        public string CreateSession()
+        {
+            try
+            {
+                gStrSessionID = Guid.NewGuid().ToString();
+                gSession = gConnection.createSession(gUserName, gPassword, gStrSessionID);
+
+                return "";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+
+        public string DestroySession()
+        {
+            try
+            {
+                gConnection.removeSession(gStrSessionID);
+
+                return "";
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+        }
+
+        public void DestroyConnection()
+        {
+            gConnection.removeSession(gStrSessionID);
+            gClient.removeConnection(gHost, gPort);
+        }
+    }
+}

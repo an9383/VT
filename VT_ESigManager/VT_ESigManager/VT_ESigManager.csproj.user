@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ProjectView>ProjectFiles</ProjectView>
+    <PublishUrlHistory>D:\바텍\Build\VT_ESigManager\|게시\</PublishUrlHistory>
+    <InstallUrlHistory>http://vtmes30.vatech.com/MES3/ESigManager/|http://10.10.50.53/MES3/ESigManager/|http://VT-MES-DEV01/MES3/ESigManager/|http://VT-MES-DEV01/MES3/ESignature/|https://VT-MES-DEV01/MES3/ESignature/</InstallUrlHistory>
+    <SupportUrlHistory />
+    <UpdateUrlHistory />
+    <BootstrapperUrlHistory />
+    <ErrorReportUrlHistory />
+    <FallbackCulture>ko-KR</FallbackCulture>
+    <VerifyUploadedFiles>false</VerifyUploadedFiles>
+  </PropertyGroup>
+  <PropertyGroup>
+    <EnableSecurityDebugging>false</EnableSecurityDebugging>
+  </PropertyGroup>
+</Project>

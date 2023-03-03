@@ -119,16 +119,16 @@
   </resheader>
   <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
   <data name="CurvedConnector" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\CurvedConnector.svg;DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v22.1, Version=22.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
+    <value>..\Resources\CurvedConnector.svg;DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v22.2, Version=22.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
   <data name="rayence_icon" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\rayence_icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="Business_Presentation" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\Business_Presentation.svg;DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v22.1, Version=22.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
+    <value>..\Resources\Business_Presentation.svg;DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v22.2, Version=22.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
   <data name="InitialState" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\InitialState.svg;DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v22.1, Version=22.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
+    <value>..\Resources\InitialState.svg;DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v22.2, Version=22.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
   <data name="vatech_logo" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\vatech_logo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -137,7 +137,7 @@
     <value>..\Resources\rayence_logo.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="EmployeeSummary" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\EmployeeSummary.svg;DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v22.1, Version=22.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
+    <value>..\Resources\EmployeeSummary.svg;DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v22.2, Version=22.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
   <data name="login_back_seail" type="System.Resources.ResXFileRef, System.Windows.Forms">
     <value>..\Resources\login_back_seail.png;System.Drawing.Bitmap, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
@@ -146,6 +146,6 @@
     <value>..\Resources\vt_icon.ico;System.Drawing.Icon, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a</value>
   </data>
   <data name="BO_User" type="System.Resources.ResXFileRef, System.Windows.Forms">
-    <value>..\Resources\BO_User.svg;DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v22.1, Version=22.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
+    <value>..\Resources\BO_User.svg;DevExpress.Utils.Svg.SvgImage, DevExpress.Data.v22.2, Version=22.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a</value>
   </data>
 </root>

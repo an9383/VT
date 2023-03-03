@@ -1,6 +1,6 @@
 ﻿<%@ Page Language="C#" AutoEventWireup="true" CodeFile="NCR_Data_For_Manufacturing.aspx.cs" Inherits="View_Dashboard_NCR_Data_For_Manufacturing" %>
 
-<%@ Register assembly="DevExpress.Dashboard.v22.1.Web.WebForms, Version=22.1.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" namespace="DevExpress.DashboardWeb" tagprefix="dx" %>
+<%@ Register assembly="DevExpress.Dashboard.v22.2.Web.WebForms, Version=22.2.4.0, Culture=neutral, PublicKeyToken=b88d1754d700e49a" namespace="DevExpress.DashboardWeb" tagprefix="dx" %>
 
 <!DOCTYPE html>
 

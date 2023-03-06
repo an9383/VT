@@ -36,7 +36,7 @@ namespace VTMES3_RE
             bool isFontInstall = false;
             foreach (FontFamily fontFamily in installedFontCollection.Families)
             {
-                if (fontFamily.Name.Equals("Pretendard SemiBold"))
+                if (fontFamily.Name.Equals("Pretendard SemiBold"))  //폰트설정
                 {
                     isFontInstall = true;
                 }
@@ -46,7 +46,7 @@ namespace VTMES3_RE
             {
                 Shell32.Shell shell = new Shell32.Shell();
                 Shell32.Folder fontFolder = shell.NameSpace(0x14);
-                fontFolder.CopyHere(Application.StartupPath + @"\Fonts\Pretendard-SemiBold.ttf");
+                fontFolder.CopyHere(Application.StartupPath + @"\Fonts\Pretendard-SemiBold.ttf");  //폰트설정
             }
 
             Application.EnableVisualStyles();

@@ -14,14 +14,14 @@
     <framework targetVersion="4.7.2" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="VTMonitor.exe.manifest" size="45906">
+    <dependentAssembly dependencyType="install" codebase="VTMonitor.exe.manifest" size="17628">
       <assemblyIdentity name="VTMonitor.exe" version="1.0.0.16" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>Nmu3egvCPnWLqen7k32Ic3DIDtbD12+G/8vHMVGzF5s=</dsig:DigestValue>
+        <dsig:DigestValue>yyal+qBdIGU9deQ1jnF9M/SUlY8AYc1xsfBT1Z2Efcg=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

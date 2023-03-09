@@ -763,14 +763,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="VTMES3.exe" size="1280000">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="VTMES3.exe" size="1280512">
       <assemblyIdentity name="VTMES3" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>uCFZyy9SvIjLfSVoyyUDo5KDG4MFtaoQ/Fz/fSdhIqQ=</dsig:DigestValue>
+        <dsig:DigestValue>2fp8Ad7/mpClO5Z9B73PkhBcCzIFBqZRQFoauz4Pf9M=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

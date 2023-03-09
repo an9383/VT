@@ -30,7 +30,7 @@
             user-select:text;  
         }  
         .dx-row-lines {  
-            user-select:text!important;  
+            user-select:text !important;  
         }
 
          .dx-header-row > td {

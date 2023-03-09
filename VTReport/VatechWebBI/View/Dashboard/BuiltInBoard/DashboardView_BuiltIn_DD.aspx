@@ -144,8 +144,7 @@
                     BeforeRender="onBeforeRender"
                     ItemWidgetCreated="onItemWidgetCreated" 
                     ItemCaptionToolbarUpdated="onItemCaptionToolbarUpdated"
-                    DashboardTitleToolbarUpdated="onDashboardTitleToolbarUpdated"
-                    >
+                    DashboardTitleToolbarUpdated="onDashboardTitleToolbarUpdated">
                 </ClientSideEvents>
 
                 <BackendOptions Uri=""></BackendOptions>

@@ -2,7 +2,7 @@
 <Project ToolsVersion="Current" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <EnableSecurityDebugging>false</EnableSecurityDebugging>
-    <PublishUrlHistory>..\..\Build\VTMES3\</PublishUrlHistory>
+    <PublishUrlHistory>C:\Users\cadians_14\Desktop\InstallFile\VT\|..\..\Build\VTMES3\</PublishUrlHistory>
     <InstallUrlHistory>http://vtmes30.vatech.com/VTMES3/</InstallUrlHistory>
     <SupportUrlHistory />
     <UpdateUrlHistory />

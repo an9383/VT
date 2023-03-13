@@ -165,7 +165,6 @@
 
     <!-- App js -->
     <script src="assets/js/app.js"></script>
-
     <script type="text/javascript">
         function setCookie(cookie_name, value, days) {
             var exdate = new Date();
